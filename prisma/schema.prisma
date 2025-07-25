@@ -13,7 +13,7 @@ model User {
   name String @unique
 
   email String @unique
-  phone String @unique
+  phone String? @unique
 
   password   String
   avatarPath String? @map("avatar_path")
