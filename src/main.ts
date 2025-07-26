@@ -8,12 +8,12 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:4100'],
     credentials: true,
     exposedHeaders: ['set-cookie'],
   });
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 4100);
 }
 
 bootstrap().catch((e) => console.log(e));
