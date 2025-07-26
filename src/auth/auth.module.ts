@@ -9,10 +9,21 @@ import { getJwtConfig } from '@/configs/jwt.config';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { GoogleRecaptchaModule } from '@nestlab/google-recaptcha';
 import { getRecaptchaConfig } from '@/configs/recaptcha.config';
+import { SocialsController } from './socials/socials.controller';
+import { GoogleStrategy } from './strategies/google.strategy';
+import { SocialsService } from './socials/socials.service';
+import { RefreshTokenService } from './refresh-token.service';
 
 @Module({
-  controllers: [AuthController],
-  providers: [AuthService, PrismaService, JwtStrategy],
+  controllers: [AuthController, SocialsController],
+  providers: [
+    AuthService,
+    SocialsService,
+    PrismaService,
+    JwtStrategy,
+    GoogleStrategy,
+    RefreshTokenService,
+  ],
   imports: [
     UserModule,
     JwtModule.registerAsync({

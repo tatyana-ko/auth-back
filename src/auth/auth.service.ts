@@ -62,7 +62,7 @@ export class AuthService {
     return 'Email verified!';
   }
 
-  buildResponseObject(user: User) {
+  async buildResponseObject(user: User) {
     const tokens = this.issueTokens(user.id, user.rights || []);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
