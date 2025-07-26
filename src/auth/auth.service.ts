@@ -38,8 +38,6 @@ export class AuthService {
     return this.buildResponseObject(user);
   }
 
-  async logout() {}
-
   async getNewTokens(refreshToken: string) {
     const result: User = await this.jwt.verifyAsync(refreshToken);
 
@@ -88,7 +86,7 @@ export class AuthService {
   private async validateUser(dto: LoginDto) {
     const user = await this.userService.getByEmail(dto.email);
 
-    if (!user) throw new UnauthorizedException('User not found! Please check the entered data!');
+    if (!user) throw new NotFoundException('User not found! Please check the entered data!');
 
     const isValidPassword = await verify(user.password, dto.password);
 
