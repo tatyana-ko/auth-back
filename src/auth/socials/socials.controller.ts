@@ -34,4 +34,23 @@ export class SocialsController {
 
     return res.redirect(`${this._CLIENT_BASE_URL}${accessToken}`);
   }
+
+  @Get('yandex')
+  @UseGuards(AuthGuard('yandex'))
+  async yandexAuth() {}
+
+  @Get('yandex/redirect')
+  @UseGuards(AuthGuard('yandex'))
+  async yandexAuthRedirect(
+    @Req() req: { user: TUserSocial },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const user = await this.socialsService.login(req);
+
+    const { accessToken, refreshToken } = await this.authService.buildResponseObject(user);
+
+    this.refreshTokenService.addRefreshTokenToResponse(res, refreshToken);
+
+    return res.redirect(`${this._CLIENT_BASE_URL}${accessToken}`);
+  }
 }
