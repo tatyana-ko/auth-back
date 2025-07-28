@@ -53,4 +53,23 @@ export class SocialsController {
 
     return res.redirect(`${this._CLIENT_BASE_URL}${accessToken}`);
   }
+
+  @Get('github')
+  @UseGuards(AuthGuard('github'))
+  async githubAuth() {}
+
+  @Get('github/redirect')
+  @UseGuards(AuthGuard('github'))
+  async githubAuthRedirect(
+    @Req() req: { user: TUserSocial },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const user = await this.socialsService.login(req);
+
+    const { accessToken, refreshToken } = await this.authService.buildResponseObject(user);
+
+    this.refreshTokenService.addRefreshTokenToResponse(res, refreshToken);
+
+    return res.redirect(`${this._CLIENT_BASE_URL}${accessToken}`);
+  }
 }

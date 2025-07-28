@@ -38,4 +38,18 @@ export interface IYandexProfile {
   }>;
 }
 
+export interface IGithubProfile {
+  id: string;
+  nodeId: string;
+  displayName: string | null;
+  username: string;
+  profileUrl: string;
+  photos: Array<{
+    value: string;
+  }>;
+  emails: Array<{
+    value: string;
+  }>;
+}
+
 export type TSocialCallback = (error: any, user: TUserSocial, info?: any) => void;
