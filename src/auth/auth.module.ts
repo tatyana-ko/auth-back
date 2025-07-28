@@ -13,6 +13,7 @@ import { SocialsController } from './socials/socials.controller';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { SocialsService } from './socials/socials.service';
 import { RefreshTokenService } from './refresh-token.service';
+import { YandexStrategy } from './strategies/yandex.strategy';
 
 @Module({
   controllers: [AuthController, SocialsController],
@@ -20,9 +21,10 @@ import { RefreshTokenService } from './refresh-token.service';
     AuthService,
     SocialsService,
     PrismaService,
+    RefreshTokenService,
     JwtStrategy,
     GoogleStrategy,
-    RefreshTokenService,
+    YandexStrategy,
   ],
   imports: [
     UserModule,
