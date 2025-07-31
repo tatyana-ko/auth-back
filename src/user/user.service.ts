@@ -44,8 +44,14 @@ export class UserService {
     return newUser;
   }
 
-  //TODO: reate and update fn;
-  async update(id: string, data: Partial<User>) {}
+  async update(id: string, data: Partial<User>) {
+    const user = await this.prisma.user.update({
+      where: { id },
+      data,
+    });
+
+    return user;
+  }
 
   async delete(id: string) {
     return this.prisma.user.delete({ where: { id } });
