@@ -62,6 +62,7 @@ export class AuthService {
     return 'Email verified!';
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   async buildResponseObject(user: User) {
     const tokens = this.issueTokens(user.id, user.rights || []);
 
@@ -88,9 +89,11 @@ export class AuthService {
 
     if (!user) throw new NotFoundException('User not found! Please check the entered data!');
 
-    const isValidPassword = await verify(user.password, dto.password);
+    if (user.password) {
+      const isValidPassword = await verify(user.password, dto.password);
 
-    if (!isValidPassword) throw new UnauthorizedException('Incorrect password!');
+      if (!isValidPassword) throw new UnauthorizedException('Incorrect password!');
+    }
 
     return user;
   }
