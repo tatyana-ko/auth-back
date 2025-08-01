@@ -15,6 +15,7 @@ import { SocialsService } from './socials/socials.service';
 import { RefreshTokenService } from './refresh-token.service';
 import { YandexStrategy } from './strategies/yandex.strategy';
 import { GitHubStrategy } from './strategies/github.strategy';
+import { EmailService } from '@/email/email.service';
 
 @Module({
   controllers: [AuthController, SocialsController],
@@ -27,6 +28,7 @@ import { GitHubStrategy } from './strategies/github.strategy';
     GoogleStrategy,
     YandexStrategy,
     GitHubStrategy,
+    EmailService,
   ],
   imports: [
     UserModule,

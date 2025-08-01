@@ -10,6 +10,7 @@ import { Role, User } from '@prisma/client';
 import { UserService } from '@/user/user.service';
 import { verify } from 'argon2';
 import { JwtService } from '@nestjs/jwt';
+import { EmailService } from '@/email/email.service';
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
     private prisma: PrismaService,
     private userService: UserService,
     private jwt: JwtService,
+    private emailService: EmailService,
   ) {}
 
   private readonly TOKEN_EXPIRATION_ACCESS = '1h';
@@ -34,6 +36,8 @@ export class AuthService {
     if (isUserAlreadyExists) throw new ConflictException('A user with this email already exists!');
 
     const user = await this.userService.create(dto);
+
+    await this.emailService.sendVerification(user.email!, user.verificationToken!);
 
     return this.buildResponseObject(user);
   }

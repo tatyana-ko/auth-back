@@ -45,12 +45,12 @@ export class AuthController {
     return this.authService.verifyEmail(token);
   }
 
-  @HttpCode(200)
-  @Post('logout')
-  // eslint-disable-next-line @typescript-eslint/require-await
-  async logout(@Res({ passthrough: true }) res: Response) {
-    this.refreshTokenService.removeRefreshTokenFromResponse(res);
+  // @HttpCode(200)
+  // @Post('logout')
+  // // eslint-disable-next-line @typescript-eslint/require-await
+  // async logout(@Res({ passthrough: true }) res: Response) {
+  //   this.refreshTokenService.removeRefreshTokenFromResponse(res);
 
-    return true;
-  }
+  //   return true;
+  // }
 }
